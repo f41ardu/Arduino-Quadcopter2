@@ -1,15 +1,9 @@
 /*
-   Arduino Quadcopter
-   Author - Ben Ripley - Aug 8, 2014
-   http://www.benripley.com/development/quadcopter-source-code-from-scratch/
-
-   Rebuild and integration MPU6050
-   (Due to lack of an ARDUIMO an IMU board (GY-521) will be integrated into the main system)
-   Introducing version number
-
+   Arduino Quadcopter2
+      
    For Version number see ReleaseNumber[] below
 
-   Production Branch 
+   Devlopment Branch
    
 */
 
@@ -21,17 +15,17 @@
 #include <Servo.h>
 
 //local libs
-#include "pinclass.h"
+#include "pinclass2.h"
 // Configuration file
 #include "Configuration.h"
 
 // Release and Build
-char VersionNumber[] = "0.2.1";
-char ReleaseNumber[] = "preRelease";
-char build[] = "build_930322";
+char VersionNumber[] = "0.1.";
+char ReleaseNumber[] = "0.0";
+char build[] = "N/A";
 
 // LEDs
-PinClass heartbeat(HEARTBEAT_LED, 500, 500);
+PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
 // Angles
 float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
@@ -66,9 +60,9 @@ void setup()
 #endif
   rx_initialize();
   mpu_init();
-  motors_initialize();
+  rotors_initialize();
   pid_initialize();
-  motors_arm();
+  rotors_arm();
   // Wait waittime (~ 20 s) that MPU can level and store first conjugated Quaternion in HQ. 
   // to define initial HOME position (Angles ~ 0°) 
   heartbeat.timechange(250, 100);
@@ -86,7 +80,7 @@ void loop()
   heartbeat.flash();
   mpu_update(); 
   mpu_ypr();
-  control_update();
+  quad_update();
 #ifdef DEBUG_OUTPUT
   debug_process();
 #endif

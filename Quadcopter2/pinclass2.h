@@ -1,10 +1,10 @@
 /*
- * Production Branch
+ * Devlopment Branch
  */ 
 // http://de.wikibooks.org/wiki/C%2B%2B-Programmierung:_Klassen
 
-#ifndef PinClass_H
-#define PinClass_H
+#ifndef PinClass2_H
+#define PinClass2_H
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"  // for digitalRead, digitalWrite, etc
@@ -13,14 +13,14 @@
 #endif 
 //#include <Arduino.h> //It is very important to remember this! note that if you are using Arduino 1.0 IDE, change "WProgram.h" to "Arduino.h"
 
-class PinClass
+class PinClass2
 {
   public:                             // öffentlich
-    PinClass();                       // der Default-Konstruktor
-    PinClass(int a);                  // weiterer Konstruktor mit Parameter
-    PinClass(int a,unsigned int OnTime, unsigned int OffTime);  
-    //   PinClass(const LED& a);      // Copy-Konstruktor wird nicht benötigt
-       ~PinClass();                   // Class Destruktor
+    PinClass2();                       // der Default-Konstruktor
+    PinClass2(int a);                  // weiterer Konstruktor mit Parameter
+    PinClass2(int a,unsigned int OnTime, unsigned int OffTime);  
+    //   PinClass2(const LED& a);      // Copy-Konstruktor wird nicht benötigt
+       ~PinClass2();                   // Class Destruktor
 
     void init(int pin);               // einen PIN mit einem (Default-) Parameter LED Initialisieresn
     void on();                        // einen PIN einschalten
@@ -38,6 +38,6 @@ class PinClass
 
 };
 
-#endif
+#endif // PinClass2
 
 

@@ -1,7 +1,13 @@
 /*
- * Production Branch
+ *Devlopment Branch
  */
 #define SAFE
+
+//------QUAD TYPE -----------
+// #define QUADP 1
+#define QUADP 1
+#define YAW_DIRECTION 1
+// define YAW_DIRECTION -11
 
 //-------PID Config----------
 #define ROLL_PID_KP  0.250
@@ -64,9 +70,9 @@
 //----------------------------
 
 //-------Motor PWM Levels
-#define MOTOR_ZERO_LEVEL  1000
-#define MOTOR_ARM_START  1500
-#define MOTOR_MAX_LEVEL  2000
+#define ROTOR_ZERO_LEVEL  1000
+#define ROTOR_ARM_START  1500
+#define ROTOR_MAX_LEVEL  2000
 
 
 //-------RX PINS-------------
@@ -76,14 +82,14 @@
 #define PIN_RX_THROTTLE 5
 #define PIN_RX_YAW 6
 
-//-------MOTOR PINS-----------
-#define PIN_MOTOR0  7
-#define PIN_MOTOR1  9
-#define PIN_MOTOR2  10
-#define PIN_MOTOR3  11
+//-------ROTOR PINS-----------
+#define PIN_ROTOR0  7
+#define PIN_ROTOR1  9
+#define PIN_ROTOR2  10
+#define PIN_ROTOR3  11
 
 //-------MPU6050 PIN-------
-#define PIN_MPU 12  // use pin 2 on Arduino Uno & most boards
+#define PIN_MPU 12  // we use pin 12 (see PinChangeInt for details)
 
 //-------LED PINS-------------
 #define HEARTBEAT_LED 13

@@ -1,5 +1,5 @@
 /*
- * Production Branch 
+ * Devlopment Branch
  */
 // To support a direkt connected MPU6050 on Arduino some rework is still required
 // This code is primarily based on the I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class using DMP (MotionApps v2.0)
