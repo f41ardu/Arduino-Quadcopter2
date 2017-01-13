@@ -49,6 +49,7 @@ void quad_update() {
     m2 = throttle - pid_pitch_out ;//+ pid_yaw_out;
     m3 = throttle - pid_roll_out ;//- pid_yaw_out;
   */
+// PIDMIX(PID,PITCH,YAW) 
 #if defined( QUADP )
   m0 = PIDMIX( 0, +1, -1); //REAR
   m1 = PIDMIX(-1, 0, +1); //RIGHT
