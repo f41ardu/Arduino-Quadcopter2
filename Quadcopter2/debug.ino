@@ -6,31 +6,29 @@ void debug_process(){
 
 #ifdef DEBUG_ANGLES
   Serial.print(F("X:"));
-  Serial.print((float)(angles[2]));
+  Serial.print((float)(quad.roll)); //ROLL?
   Serial.print(',');
   Serial.print(F("Y:"));
-  Serial.print((float)(angles[1]));
+  Serial.print((float)(quad.pitch)); //PITCH?
   Serial.print(',');
   Serial.print(F("Z:"));
-  Serial.print((float)(angles[0]));
-  Serial.print(',');
-  Serial.print(gz);
+  Serial.print((float)(quad.yaw)); //YAW?
 #endif
 
 #ifdef DEBUG_GYRO
-  Serial.print(gx);
+  Serial.print(GYRO.x);
   Serial.print(',');
-  Serial.print(gy);
+  Serial.print(GYRO.y);
   Serial.print(',');
-  Serial.print(gz);
+  Serial.print(GYRO.z);
 #endif
 
 #ifdef DEBUG_ACC
-  Serial.print(ax);
+  Serial.print(ACC:x);
   Serial.print(',');
-  Serial.print(ay);
+  Serial.print(ACC.y);
   Serial.print(',');
-  Serial.print(az);
+  Serial.print(ACC.z);
 #endif
 
 #ifdef DEBUG_RX
@@ -93,16 +91,12 @@ void debug_process(){
 #endif
 
 #ifdef DEBUG_YAWPITCHROLL 
-// YAW,PITCH,ROLL in degress
-//  ypr[0]=  ypr[0] * 180 / M_PI; // YAW
-//  ypr[1] = ypr[1] * 180 / M_PI; // PITCH
-//  ypr[2] = ypr[2] * 180 / M_PI; // ROLL 
-
-  Serial.print((float)(angles[2])); //ROLL?
+  // YAW,PITCH,ROLL in degress
+  Serial.print((float)(quad.roll)); //ROLL?
   Serial.print(',');
-  Serial.print((float)(angles[1])); //PITCH?
+  Serial.print((float)(quad.pitch)); //PITCH?
   Serial.print(',');
-  Serial.print((float)(angles[0])); //YAW? 
+  Serial.print((float)(quad.yaw)); //YAW? 
 #endif
 
   Serial.println();

@@ -29,6 +29,8 @@ uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
+// Quaternions and parameters for 6 DoF sensor fusion calculations
+Quaternion q;          // [w, x, y, z]         quaternion container
 
 // float ypr[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
@@ -137,22 +139,25 @@ void mpu_update() {
 // ===               MPU Calculate YPR ROUTINE                  ===
 // ================================================================
 void  mpu_ypr() {
-  // calculate YAW. PICH, ROLL from given Quaternions
-  // and return YAW, PITCH, ROLL
-  // Quaternions and parameters for 6 DoF sensor fusion calculations
+  float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   VectorFloat gravity;    // [x, y, z]            gravity vector
-  // uncerttain if this is necessaary (it is used in the Processing teapot example)
+  mpu.getMotion6(&ACC.x, &ACC.y, &ACC.z, &GYRO.x, &GYRO.y, &GYRO.z);
+  mpu.dmpGetGravity(&gravity, &q);
+   // uncerttain if this is necessaary (it is used in the Processing teapot example)
   if (q.w >= 2.0f) q.w = -4.0f + q.w;
   if (q.x >= 2.0f) q.x = -4.0f + q.x;
   if (q.y >= 2.0f) q.y = -4.0f + q.y;
   if (q.z >= 2.0f) q.z = -4.0f + q.z;
-  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-  mpu.dmpGetGravity(&gravity, &q);
   mpu.dmpGetYawPitchRoll(angles, &q, &gravity);
   // YAW,PITCH,ROLL in degress
-  for (int i = 0; i < 3; i++) {
+  /* for (int i = 0; i < 3; i++) {
     angles[i] = angles[i] * 180. / PI; // index 0 = YAW, 1 = PITCH, 2 = ROLL
   }
+  */
+  // index 0 = YAW, 1 = PITCH, 2 = ROLL
+  quad.pitch = angles[1]*PI2DEG;
+  quad.roll  = angles[2]*PI2DEG;
+  quad.yaw   = angles[0]*PI2DEG;
 }
 
 

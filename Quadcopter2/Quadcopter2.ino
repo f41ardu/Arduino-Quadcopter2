@@ -18,19 +18,20 @@
 #include "pinclass2.h"
 // Configuration file
 #include "Configuration.h"
+#include "common.h"
 
 // Release and Build
-char VersionNumber[] = "0.1.";
+char VersionNumber[] = "0.1.3";
 char ReleaseNumber[] = "0.0";
 char build[] = "N/A";
 
 // LEDs
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
-
-float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-int16_t ax, ay, az;
-int16_t gx, gy, gz;
+// Variables for Sensordata
+SENSOR_YPR quad;
+SENSOR_ACC ACC;
+SENSOR_GYRO GYRO; 
 
 // RX Signals
 int throttle = THROTTLE_RMIN;
@@ -47,9 +48,7 @@ int m0, m1, m2, m3; // Front, Right, Back, Left
 // Helper
 unsigned long  lastUpdate;
 int currentMillis, previousMillis, waitTime = 20000;
-
-// Quaternions and parameters for 6 DoF sensor fusion calculations
-Quaternion q;          // [w, x, y, z]         quaternion container
+#define PI2DEG  180.0f / PI;
 
 void setup()
 {
