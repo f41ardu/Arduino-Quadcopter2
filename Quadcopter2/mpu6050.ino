@@ -52,7 +52,6 @@ void dmpDataReady() {
 // ===               MPU INIT ROUTINE                           ===
 // ================================================================
 void mpu_init() {
-  float ypr[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   // join I2C bus (I2Cdev library doesn't do this automatically)
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
   Wire.begin();
@@ -68,7 +67,6 @@ void mpu_init() {
   Serial.println(F("Testing device connections..."));
   Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
   delay(500);
-
   // load and configure the DMP
   Serial.println(F("Initializing DMP..."));
   devStatus = mpu.dmpInitialize();

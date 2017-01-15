@@ -27,7 +27,7 @@ char build[] = "N/A";
 // LEDs
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
-// Angles
+
 float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
@@ -75,6 +75,7 @@ void setup()
   // Here we go 
   heartbeat.timechange(500, 500);
 }
+
 void loop()
 {
   heartbeat.flash();

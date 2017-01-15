@@ -4,7 +4,7 @@
 #define SAFE
 
 //------QUAD TYPE -----------
-// #define QUADP 1
+// #define QUADX 1
 #define QUADP 1
 #define YAW_DIRECTION 1
 // define YAW_DIRECTION -11
