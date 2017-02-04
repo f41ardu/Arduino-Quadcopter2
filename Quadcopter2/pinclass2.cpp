@@ -3,11 +3,6 @@
  */ 
 // http://de.wikibooks.org/wiki/C%2B%2B-Programmierung:_Klassen
 
-//if defined(ARDUINO) && ARDUINO >= 100
-//#include "Arduino.h"  // for digitalRead, digitalWrite, etc
-//#else
-//#include "WProgram.h"
-//#endif
 #include "PinClass2.h"
 
 PinClass2::PinClass2(): // Constructor

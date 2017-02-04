@@ -3,6 +3,9 @@
  *  
  *  Devlopment Branch
  *  
+ *  2017-01-15 f41ardu - moved Quaterion variables into functions (mpu6050.ino) 
+ *  Removed comments in pinclass2.cpp
+ *  
  *  2017-01-15 f41ardu - introduce struct variables to store YAWPITCHROLL and ACC and GYRO values from sensor 
  *  Introduce common.h to for structs
  *  

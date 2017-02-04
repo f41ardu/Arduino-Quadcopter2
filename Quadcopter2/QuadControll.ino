@@ -3,7 +3,7 @@
 */
 
 // #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
-// PID Mixer 
+// PID Mixer (from MultiWii)
 #define PIDMIX(X,Y,Z) throttle+ pid_roll_out*X  +  pid_pitch_out*Y + pid_yaw_out*Z
 
 void quad_update() {
@@ -15,8 +15,8 @@ void quad_update() {
   pid_compute();
 
   /*
-      See Multiww_2 output.cpp
-      #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
+      Code from Multiww_2 output.cpp
+    #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
     #if defined( MY_PRIVATE_MIXING )
       #include MY_PRIVATE_MIXING
     #elif defined( BI )

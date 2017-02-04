@@ -29,11 +29,6 @@ uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
-// Quaternions and parameters for 6 DoF sensor fusion calculations
-Quaternion q;          // [w, x, y, z]         quaternion container
-
-// float ypr[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-
 // code begins here
 /*
      Four functions:
@@ -48,7 +43,7 @@ Quaternion q;          // [w, x, y, z]         quaternion container
 // Needed by MPU6050
 void dmpDataReady() {
   latest_interrupted_pin = PCintPort::arduinoPin;
-  if ( latest_interrupted_pin == PIN_MPU) mpuInterrupt = true; // might be not necessary
+  if ( latest_interrupted_pin == PIN_MPU) mpuInterrupt = true; 
 }
 // ================================================================
 // ===               MPU INIT ROUTINE                           ===
@@ -106,6 +101,8 @@ void mpu_init() {
 // ===               MPU Update ROUTINE                         ===
 // ================================================================
 void mpu_update() {
+  // Quaternions and parameters for 6 DoF sensor fusion calculations
+  Quaternion q;          // [w, x, y, z]         quaternion container
   // if programming failed, don't try to do anything
   if (!dmpReady) return;
   // wait for MPU interrupt or extra packet(s) available
@@ -139,6 +136,8 @@ void mpu_update() {
 // ===               MPU Calculate YPR ROUTINE                  ===
 // ================================================================
 void  mpu_ypr() {
+   // Quaternions and parameters for 6 DoF sensor fusion calculations
+  Quaternion q;          // [w, x, y, z]         quaternion container
   float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   VectorFloat gravity;    // [x, y, z]            gravity vector
   mpu.getMotion6(&ACC.x, &ACC.y, &ACC.z, &GYRO.x, &GYRO.y, &GYRO.z);
