@@ -3,7 +3,7 @@
  *  
  *  Devlopment Branch
  *  
- *  2017-02-04 f41ardu removed mpu_update and merge mpu read into mpu_ypr
+ *  2017-02-04 f41ardu removed mpu_update and merged into mpu_ypr
  *  
  *  2017-02-04 f41ardu introduced motormix
  *  
