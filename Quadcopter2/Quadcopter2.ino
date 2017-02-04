@@ -29,9 +29,9 @@ char build[] = "N/A";
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
 // Variables for Sensordata
-SENSOR_YPR quad;
-SENSOR_ACC ACC;
-SENSOR_GYRO GYRO; 
+volatile SENSOR_YPR quad;
+volatile SENSOR_ACC ACC;
+volatile SENSOR_GYRO GYRO; 
 
 // RX Signals
 int throttle = THROTTLE_RMIN;

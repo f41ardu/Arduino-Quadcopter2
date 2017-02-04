@@ -7,7 +7,7 @@
 
 // YPR
 struct SENSOR_YPR {
-  float yaw;
+   float yaw;
   float pitch;
   float roll;
 };
