@@ -3,8 +3,7 @@
 */
 
 // #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
-// PID Mixer (from MultiWii)
-#define PIDMIX(X,Y,Z) throttle+ pid_roll_out*X  +  pid_pitch_out*Y + pid_yaw_out*Z
+#define MOTORMIX(X,Y,Z) throttle + pid_roll_out*X  +  pid_pitch_out*Y + pid_yaw_out*Z
 
 void quad_update() {
 
@@ -51,15 +50,15 @@ void quad_update() {
   */
 // PIDMIX(PID,PITCH,YAW) 
 #if defined( QUADP )
-  m0 = PIDMIX( 0, +1, -1); //REAR
-  m1 = PIDMIX(-1, 0, +1); //RIGHT
-  m2 = PIDMIX(+1, 0, +1); //LEFT
-  m3 = PIDMIX( 0, -1, -1); //FRONT
+  m0 = MOTORMIX( 0, +1, -1); //REAR
+  m1 = MOTORMIX(-1, 0, +1); //RIGHT
+  m2 = MOTORMIX(+1, 0, +1); //LEFT
+  m3 = MOTORMIX( 0, -1, -1); //FRONT
 #elif defined( QUADX )
-  m0 = PIDMIX(-1, +1, -1); //REAR_R
-  m1 = PIDMIX(-1, -1, +1); //FRONT_R
-  m2 = PIDMIX(+1, +1, +1); //REAR_L
-  m3 = PIDMIX(+1, -1, -1); //FRONT_L
+  m0 = MOTORMIX(-1, +1, -1); //REAR_R
+  m1 = MOTORMIX(-1, -1, +1); //FRONT_R
+  m2 = MOTORMIX(+1, +1, +1); //REAR_L
+  m3 = MOTORMIX(+1, -1, -1); //FRONT_L
 #endif
 
 
