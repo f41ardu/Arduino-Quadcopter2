@@ -3,7 +3,7 @@
       
    For Version number see ReleaseNumber[] below
 
-   Devlopment Branch
+   Devlopment Branch variables
    
 */
 
