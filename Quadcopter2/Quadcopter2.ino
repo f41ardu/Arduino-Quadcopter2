@@ -67,7 +67,7 @@ void setup()
   heartbeat.timechange(250, 100);
   previousMillis = millis();
   while ((currentMillis - previousMillis) < waitTime) {
-    mpu_update();
+    mpu_ypr();
     heartbeat.flash();
     currentMillis = millis();
   }
@@ -78,7 +78,6 @@ void setup()
 void loop()
 {
   heartbeat.flash();
-  mpu_update(); 
   mpu_ypr();
   quad_update();
 #ifdef DEBUG_OUTPUT

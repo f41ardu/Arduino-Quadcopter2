@@ -1,6 +1,6 @@
 /*
- * Devlopment Branch
- */
+   Devlopment Branch
+*/
 // To support a direkt connected MPU6050 on Arduino some rework is still required
 // This code is primarily based on the I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class using DMP (MotionApps v2.0)
 // 6/21/2012 by Jeff Rowberg <jeff@rowberg.net>
@@ -10,7 +10,7 @@
   SDA ----------------------- A4
   SCL ----------------------- A5
   GND ---------------------- GND
-  INT ---------------------- See PIN_MPU in Configuration.h 
+  INT ---------------------- See PIN_MPU in Configuration.h
   See comments below
 */
 /*
@@ -34,7 +34,7 @@ uint8_t fifoBuffer[64]; // FIFO storage buffer
      Four functions:
      dmpDataReady (could be solved using an _state variable)
      mpu_init
-     mpu_update (called coniniously from loop) 
+     mpu_update (called coniniously from loop)
      mpu_ypr calculate YAW, PITCH and ROLL
 */
 // ================================================================
@@ -43,7 +43,7 @@ uint8_t fifoBuffer[64]; // FIFO storage buffer
 // Needed by MPU6050
 void dmpDataReady() {
   latest_interrupted_pin = PCintPort::arduinoPin;
-  if ( latest_interrupted_pin == PIN_MPU) mpuInterrupt = true; 
+  if ( latest_interrupted_pin == PIN_MPU) mpuInterrupt = true;
 }
 // ================================================================
 // ===               MPU INIT ROUTINE                           ===
@@ -100,6 +100,7 @@ void mpu_init() {
 // ================================================================
 // ===               MPU Update ROUTINE                         ===
 // ================================================================
+/*
 void mpu_update() {
   // Quaternions and parameters for 6 DoF sensor fusion calculations
   Quaternion q;          // [w, x, y, z]         quaternion container
@@ -132,31 +133,59 @@ void mpu_update() {
     mpu.dmpGetQuaternion(&q, fifoBuffer);
   }
 }
+*/ 
 // ================================================================
 // ===               MPU Calculate YPR ROUTINE                  ===
 // ================================================================
 void  mpu_ypr() {
-   // Quaternions and parameters for 6 DoF sensor fusion calculations
+  // Quaternions and parameters for 6 DoF sensor fusion calculations
   Quaternion q;          // [w, x, y, z]         quaternion container
   float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   VectorFloat gravity;    // [x, y, z]            gravity vector
-  mpu.getMotion6(&ACC.x, &ACC.y, &ACC.z, &GYRO.x, &GYRO.y, &GYRO.z);
-  mpu.dmpGetGravity(&gravity, &q);
-   // uncerttain if this is necessaary (it is used in the Processing teapot example)
-  if (q.w >= 2.0f) q.w = -4.0f + q.w;
-  if (q.x >= 2.0f) q.x = -4.0f + q.x;
-  if (q.y >= 2.0f) q.y = -4.0f + q.y;
-  if (q.z >= 2.0f) q.z = -4.0f + q.z;
-  mpu.dmpGetYawPitchRoll(angles, &q, &gravity);
-  // YAW,PITCH,ROLL in degress
-  /* for (int i = 0; i < 3; i++) {
-    angles[i] = angles[i] * 180. / PI; // index 0 = YAW, 1 = PITCH, 2 = ROLL
+  if (!dmpReady) return;
+  // wait for MPU interrupt or extra packet(s) available
+  while (!mpuInterrupt && fifoCount < packetSize) {
+    // do nothing here
   }
-  */
-  // index 0 = YAW, 1 = PITCH, 2 = ROLL
-  quad.pitch = angles[1]*PI2DEG;
-  quad.roll  = angles[2]*PI2DEG;
-  quad.yaw   = angles[0]*PI2DEG;
+  // reset interrupt flag and get INT_STATUS byte
+  mpuInterrupt = false;
+  mpuIntStatus = mpu.getIntStatus();
+  // get current FIFO count
+  fifoCount = mpu.getFIFOCount();
+  // check for overflow (this should never happen unless our code is too inefficient)
+  if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+    // reset so we can continue cleanly
+    mpu.resetFIFO();
+    //    Serial.println(F("FIFO overflow!"));
+    // otherwise, check for DMP data ready interrupt (this should happen frequently)
+  } else if (mpuIntStatus & 0x02) {
+    // wait for correct available data length, should be a VERY short wait
+    while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+    // read a packet from FIFO
+    mpu.getFIFOBytes(fifoBuffer, packetSize);
+    // track FIFO count here in case there is > 1 packet available
+    // (this lets us immediately read more without waiting for an interrupt)
+    fifoCount -= packetSize;
+    // get quaternion values in InvenSense Teapot format and store them in q
+    mpu.dmpGetQuaternion(&q, fifoBuffer);
+    mpu.dmpGetGravity(&gravity, &q);
+    // uncerttain if this is necessaary (it is used in the Processing teapot example)
+    if (q.w >= 2.0f) q.w = -4.0f + q.w;
+    if (q.x >= 2.0f) q.x = -4.0f + q.x;
+    if (q.y >= 2.0f) q.y = -4.0f + q.y;
+    if (q.z >= 2.0f) q.z = -4.0f + q.z;
+    mpu.dmpGetYawPitchRoll(angles, &q, &gravity);
+    mpu.getMotion6(&ACC.x, &ACC.y, &ACC.z, &GYRO.x, &GYRO.y, &GYRO.z);
+    // YAW,PITCH,ROLL in degress
+    /* for (int i = 0; i < 3; i++) {
+      angles[i] = angles[i] * 180. / PI; // index 0 = YAW, 1 = PITCH, 2 = ROLL
+      }
+    */
+    // index 0 = YAW, 1 = PITCH, 2 = ROLL
+    quad.pitch = angles[1] * PI2DEG;
+    quad.roll  = angles[2] * PI2DEG;
+    quad.yaw   = angles[0] * PI2DEG;
+  }
 }
 
 
