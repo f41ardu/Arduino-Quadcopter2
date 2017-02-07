@@ -49,19 +49,19 @@ void debug_process(struct SENSOR_YPR *_quad){
 
 #ifdef DEBUG_PID
   Serial.print(F("PID_R:"));
-  Serial.print(pid_roll_in);Serial.print(',');
-  Serial.print(pid_roll_setpoint);Serial.print(',');
-  Serial.print(pid_roll_out);
+  Serial.print(roll.in);Serial.print(',');
+  Serial.print(roll.setpoint);Serial.print(',');
+  Serial.print(roll.out);
   Serial.print('\t');
   Serial.print(F("PID_P:"));
-  Serial.print(pid_pitch_in);Serial.print(',');
-  Serial.print(pid_pitch_setpoint);Serial.print(',');
-  Serial.print(pid_pitch_out);
+  Serial.print(pitch.in);Serial.print(',');
+  Serial.print(pitch.setpoint);Serial.print(',');
+  Serial.print(pitch.out);
   Serial.print('\t');
   Serial.print(F("PID_Y:"));
-  Serial.print(pid_yaw_in);Serial.print(',');
-  Serial.print(pid_yaw_setpoint);Serial.print(',');
-  Serial.print(pid_yaw_out);
+  Serial.print(yaw.in);Serial.print(',');
+  Serial.print(yaw.setpoint);Serial.print(',');
+  Serial.print(yaw.out);
   Serial.print('\t');
 #endif
 

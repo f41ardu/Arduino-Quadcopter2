@@ -28,17 +28,14 @@ char build[] = "N/A";
 // LEDs
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
-// Variables for Sensordata
-
-
 // RX Signals
 int throttle = THROTTLE_RMIN;
 volatile int rx_values[4]; // ROLL, PITCH, THROTTLE, YAW
 
 // PID variables
-double pid_roll_in,   pid_roll_out,   pid_roll_setpoint = 0;
-double pid_pitch_in,  pid_pitch_out,  pid_pitch_setpoint = 0;
-double pid_yaw_in,    pid_yaw_out,    pid_yaw_setpoint = 0;
+struct QUAD_PID roll; 
+struct QUAD_PID pitch; 
+struct QUAD_PID yaw; 
 
 // Motors
 int m0, m1, m2, m3; // Front, Right, Back, Left
@@ -51,7 +48,7 @@ int currentMillis, previousMillis, waitTime = 20000;
 void setup()
 {
   SENSOR_YPR quad;
-#ifdef DEBUG_OUTPUT
+  #ifdef DEBUG_OUTPUT
   Serial.begin(38400);
   while (!Serial);
   Serial.println("Debug Output ON");

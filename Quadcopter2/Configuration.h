@@ -94,3 +94,31 @@
 //-------LED PINS-------------
 #define HEARTBEAT_LED 13
 
+/*
+      Code from Multiww_2 output.cpp
+    #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
+    #if defined( MY_PRIVATE_MIXING )
+      #include MY_PRIVATE_MIXING
+    #elif defined( BI )
+      motor[0] = PIDMIX(+1, 0, 0); //LEFT
+      motor[1] = PIDMIX(-1, 0, 0); //RIGHT
+      servo[4] = (SERVODIR(4,2) * axisPID[YAW]) + (SERVODIR(4,1) * axisPID[PITCH]) + get_middle(4); //LEFT
+      servo[5] = (SERVODIR(5,2) * axisPID[YAW]) + (SERVODIR(5,1) * axisPID[PITCH]) + get_middle(5); //RIGHT
+    #elif defined( TRI )
+      motor[0] = PIDMIX( 0,+4/3, 0); //REAR
+      motor[1] = PIDMIX(-1,-2/3, 0); //RIGHT
+      motor[2] = PIDMIX(+1,-2/3, 0); //LEFT
+      servo[5] = (SERVODIR(5, 1) * axisPID[YAW]) + get_middle(5); //REAR
+    #elif defined( QUADP )
+      motor[0] = PIDMIX( 0,+1,-1); //REAR
+      motor[1] = PIDMIX(-1, 0,+1); //RIGHT
+      motor[2] = PIDMIX(+1, 0,+1); //LEFT
+      motor[3] = PIDMIX( 0,-1,-1); //FRONT
+    #elif defined( QUADX )
+      motor[0] = PIDMIX(-1,+1,-1); //REAR_R
+      motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
+      motor[2] = PIDMIX(+1,+1,+1); //REAR_L
+      motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
+  */
+
+
