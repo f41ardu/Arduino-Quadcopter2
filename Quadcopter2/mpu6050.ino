@@ -100,11 +100,13 @@ void mpu_init() {
 // ================================================================
 // ===               MPU Calculate YPR ROUTINE                  ===
 // ================================================================
-void  mpu_ypr() {
+void  mpu_ypr(struct SENSOR_YPR *_quad) {
   // Quaternions and parameters for 6 DoF sensor fusion calculations
   Quaternion q;          // [w, x, y, z]         quaternion container
   float angles[3]; // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   VectorFloat gravity;    // [x, y, z]            gravity vector
+  int16_t ax, ay, az;
+  int16_t gx, gy, gz;
   if (!dmpReady) return;
   // wait for MPU interrupt or extra packet(s) available
   while (!mpuInterrupt && fifoCount < packetSize) {
@@ -138,16 +140,14 @@ void  mpu_ypr() {
     if (q.y >= 2.0f) q.y = -4.0f + q.y;
     if (q.z >= 2.0f) q.z = -4.0f + q.z;
     mpu.dmpGetYawPitchRoll(angles, &q, &gravity);
-    mpu.getMotion6(&ACC.x, &ACC.y, &ACC.z, &GYRO.x, &GYRO.y, &GYRO.z);
+    mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+    _quad->gx = gx; 
+    _quad->gy= gy;
+    _quad->gz = gz;
     // YAW,PITCH,ROLL in degress
-    /* for (int i = 0; i < 3; i++) {
-      angles[i] = angles[i] * 180. / PI; // index 0 = YAW, 1 = PITCH, 2 = ROLL
-      }
-    */
-    // index 0 = YAW, 1 = PITCH, 2 = ROLL
-    quad.pitch = angles[1] * PI2DEG;
-    quad.roll  = angles[2] * PI2DEG;
-    quad.yaw   = angles[0] * PI2DEG;
+    _quad->pitch = angles[1] * PI2DEG;
+    _quad->roll  = angles[2] * PI2DEG;
+    _quad->yaw   = angles[0] * PI2DEG;
   }
 }
 

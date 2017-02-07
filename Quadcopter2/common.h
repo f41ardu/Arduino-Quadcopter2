@@ -5,21 +5,14 @@
  */
 
 
-// YPR
 struct SENSOR_YPR {
-   float yaw;
+  float yaw;
   float pitch;
   float roll;
-};
-// ACC
-struct SENSOR_ACC {
-  int16_t x;
-  int16_t y;
-  int16_t z;
-};
-// GYRO
-struct SENSOR_GYRO {
-  int16_t x;
-  int16_t y;
-  int16_t z;
+  int16_t gx;
+  int16_t gy;
+  int16_t gz;
+  int16_t ax;
+  int16_t ay;
+  int16_t az;
 };

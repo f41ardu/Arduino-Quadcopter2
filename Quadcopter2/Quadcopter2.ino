@@ -1,10 +1,10 @@
 /*
    Arduino Quadcopter2
-      
+
    For Version number see ReleaseNumber[] below
 
    Devlopment Branch variables
-   
+
 */
 
 // global libs
@@ -29,9 +29,7 @@ char build[] = "N/A";
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
 
 // Variables for Sensordata
-volatile SENSOR_YPR quad;
-volatile SENSOR_ACC ACC;
-volatile SENSOR_GYRO GYRO; 
+
 
 // RX Signals
 int throttle = THROTTLE_RMIN;
@@ -52,6 +50,7 @@ int currentMillis, previousMillis, waitTime = 20000;
 
 void setup()
 {
+  SENSOR_YPR quad;
 #ifdef DEBUG_OUTPUT
   Serial.begin(38400);
   while (!Serial);
@@ -62,26 +61,30 @@ void setup()
   rotors_initialize();
   pid_initialize();
   rotors_arm();
-  // Wait waittime (~ 20 s) that MPU can level and store first conjugated Quaternion in HQ. 
-  // to define initial HOME position (Angles ~ 0°) 
+  // Wait waittime (~ 20 s) that MPU can level and store first conjugated Quaternion in HQ.
+  // to define initial HOME position (Angles ~ 0°)
   heartbeat.timechange(250, 100);
   previousMillis = millis();
   while ((currentMillis - previousMillis) < waitTime) {
-    mpu_ypr();
+    mpu_ypr(&quad);
     heartbeat.flash();
     currentMillis = millis();
+#ifdef DEBUG_OUTPUT
+    debug_process(&quad);
+#endif
   }
-  // Here we go 
+  // Here we go
   heartbeat.timechange(500, 500);
 }
 
 void loop()
 {
+  SENSOR_YPR quad;
   heartbeat.flash();
-  mpu_ypr();
-  quad_update();
+  mpu_ypr(&quad);
+  quad_update(&quad);
 #ifdef DEBUG_OUTPUT
-  debug_process();
+  debug_process(&quad);
 #endif
   lastUpdate = micros();
 }

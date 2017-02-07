@@ -20,24 +20,4 @@ void pid_initialize() {
   pidYaw.SetSampleTime(10);
 }
 
-void pid_update(){
-/*  angleZ = ypr[0] * 180 / M_PI; // YAW
-    angleY = ypr[1] * 180 / M_PI; // PITCH
-    angleX = ypr[2] * 180 / M_PI; // ROLL
- */   
-/*  
-  pid_roll_in = angles[2];   // angleX
-  pid_pitch_in = angles[1];  // angleY
-  pid_yaw_in = angles[0];    // angleZ  
-*/   
-// latest approach using struct variables
-  pid_roll_in = quad.roll;   // angleX
-  pid_pitch_in = quad.pitch;  // angleY
-  pid_yaw_in = quad.yaw;;    // angleZ
-}
 
-void pid_compute() {
-   pidRoll.Compute();
-   pidPitch.Compute();
-   pidYaw.Compute();
-}

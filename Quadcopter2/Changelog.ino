@@ -3,6 +3,10 @@
  *  
  *  Devlopment Branch
  *  
+ *  2017-02-07 f41ardu removed volatile from struct, moved all sensor variables into one structure 
+ *  see common.h, removed common sensor and passing SENSOR struct as pointer in functions.  
+ *  Simplified PidController.ino and moved compute into Quadcontroll
+ *  
  *  2017-02-04 f41ardu volatile struct 
  *  
  *  2017-02-04 f41ardu removed mpu_update and merged into mpu_ypr

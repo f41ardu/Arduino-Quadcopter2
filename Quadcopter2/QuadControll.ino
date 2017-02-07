@@ -5,14 +5,16 @@
 // #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z
 #define MOTORMIX(X,Y,Z) throttle + pid_roll_out*X  +  pid_pitch_out*Y + pid_yaw_out*Z
 
-void quad_update() {
+void quad_update(struct SENSOR_YPR *_quad) {
 
   throttle = map(rx_values[2], THROTTLE_RMIN, THROTTLE_RMAX, ROTOR_ZERO_LEVEL, ROTOR_MAX_LEVEL);
-
   setpoint_update();
-  pid_update();
-  pid_compute();
-
+  pid_roll_in = _quad->roll;   // angleX
+  pid_pitch_in = _quad->pitch;  // angleY
+  pid_yaw_in = _quad->yaw;;    // angleZ
+  pidRoll.Compute();
+  pidPitch.Compute();
+  pidYaw.Compute();
   /*
       Code from Multiww_2 output.cpp
     #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z

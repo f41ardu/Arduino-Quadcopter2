@@ -1,34 +1,34 @@
 /*
  * Devlopment Branch
  */
-void debug_process(){
+void debug_process(struct SENSOR_YPR *_quad){
 #ifdef DEBUG_OUTPUT  
 
 #ifdef DEBUG_ANGLES
   Serial.print(F("X:"));
-  Serial.print((float)(quad.roll)); //ROLL?
+  Serial.print((float)(_quad->roll)); //ROLL?
   Serial.print(',');
   Serial.print(F("Y:"));
-  Serial.print((float)(quad.pitch)); //PITCH?
+  Serial.print((float)(_quad->pitch)); //PITCH?
   Serial.print(',');
   Serial.print(F("Z:"));
-  Serial.print((float)(quad.yaw)); //YAW?
+  Serial.print((float)(_quad->yaw)); //YAW?
 #endif
 
 #ifdef DEBUG_GYRO
-  Serial.print(GYRO.x);
+  Serial.print(_quad->gx);
   Serial.print(',');
-  Serial.print(GYRO.y);
+  Serial.print(_quad->gy);
   Serial.print(',');
-  Serial.print(GYRO.z);
+  Serial.print(_quad->gz);
 #endif
 
 #ifdef DEBUG_ACC
-  Serial.print(ACC:x);
+  Serial.print(_quad->qx);
   Serial.print(',');
-  Serial.print(ACC.y);
+  Serial.print(_quad->ay);
   Serial.print(',');
-  Serial.print(ACC.z);
+  Serial.print(_quad->az);
 #endif
 
 #ifdef DEBUG_RX
@@ -92,11 +92,11 @@ void debug_process(){
 
 #ifdef DEBUG_YAWPITCHROLL 
   // YAW,PITCH,ROLL in degress
-  Serial.print((float)(quad.roll)); //ROLL?
+  Serial.print((float)(_quad->roll)); //ROLL?
   Serial.print(',');
-  Serial.print((float)(quad.pitch)); //PITCH?
+  Serial.print((float)(_quad->pitch)); //PITCH?
   Serial.print(',');
-  Serial.print((float)(quad.yaw)); //YAW? 
+  Serial.print((float)(_quad->yaw)); //YAW? 
 #endif
 
   Serial.println();
