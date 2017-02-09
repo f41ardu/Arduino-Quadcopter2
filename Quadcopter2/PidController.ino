@@ -2,7 +2,10 @@
  * Devlopment Branch
  */
 // https://oscarliang.com/quadcopter-pid-explained-tuning/
-
+// PID variables
+struct QUAD_PID roll; 
+struct QUAD_PID pitch; 
+struct QUAD_PID yaw; 
 
 PID pidRoll(&roll.in,   &roll.out,  &roll.setpoint,  ROLL_PID_KP, ROLL_PID_KI, ROLL_PID_KD, REVERSE);
 PID pidPitch(&pitch.in, &pitch.out, &pitch.setpoint, PITCH_PID_KP, PITCH_PID_KI, PITCH_PID_KD, REVERSE);

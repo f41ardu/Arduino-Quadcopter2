@@ -3,6 +3,10 @@
  *  
  *  Devlopment Branch
  *  
+ *  2017-02-07 f41ardu moved pid strict into pidcontroler.ino
+ * disabled quad limitation 
+ *  
+ *  2017-02-07 f41ardu introduced struct for pid variables
  *  
  *  2017-02-07 f41ardu removed volatile from struct, moved all sensor variables into one structure 
  *  see common.h, removed common sensor and passing SENSOR struct as pointer in functions.  

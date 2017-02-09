@@ -33,10 +33,11 @@ int throttle = THROTTLE_RMIN;
 volatile int rx_values[4]; // ROLL, PITCH, THROTTLE, YAW
 
 // PID variables
+/*
 struct QUAD_PID roll; 
 struct QUAD_PID pitch; 
 struct QUAD_PID yaw; 
-
+*/
 // Motors
 int m0, m1, m2, m3; // Front, Right, Back, Left
 

@@ -134,11 +134,13 @@ void  mpu_ypr(struct SENSOR_YPR *_quad) {
     // get quaternion values in InvenSense Teapot format and store them in q
     mpu.dmpGetQuaternion(&q, fifoBuffer);
     mpu.dmpGetGravity(&gravity, &q);
+ /*
     // uncerttain if this is necessaary (it is used in the Processing teapot example)
     if (q.w >= 2.0f) q.w = -4.0f + q.w;
     if (q.x >= 2.0f) q.x = -4.0f + q.x;
     if (q.y >= 2.0f) q.y = -4.0f + q.y;
     if (q.z >= 2.0f) q.z = -4.0f + q.z;
+ */
     mpu.dmpGetYawPitchRoll(angles, &q, &gravity);
     mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     _quad->gx = gx; 
