@@ -27,20 +27,15 @@ char build[] = "N/A";
 
 // LEDs
 PinClass2 heartbeat(HEARTBEAT_LED, 500, 500);
-
 // RX Signals
 int throttle = THROTTLE_RMIN;
 volatile int rx_values[4]; // ROLL, PITCH, THROTTLE, YAW
-
 // PID variables
-/*
 struct QUAD_PID roll; 
 struct QUAD_PID pitch; 
 struct QUAD_PID yaw; 
-*/
 // Motors
 int m0, m1, m2, m3; // Front, Right, Back, Left
-
 // Helper
 unsigned long  lastUpdate;
 int currentMillis, previousMillis, waitTime = 20000;

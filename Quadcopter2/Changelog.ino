@@ -3,6 +3,8 @@
  *  
  *  Devlopment Branch
  *  
+ *  2017-02-07 f41ardu moved PID variables back to main ino
+ *  
  *  2017-02-07 f41ardu moved pid strict into pidcontroler.ino
  * disabled quad limitation 
  *  
