@@ -3,7 +3,7 @@
  */ 
 // http://de.wikibooks.org/wiki/C%2B%2B-Programmierung:_Klassen
 
-#include "PinClass2.h"
+#include "pinclass2.h"
 
 PinClass2::PinClass2(): // Constructor
   _pin(0), _status(0)

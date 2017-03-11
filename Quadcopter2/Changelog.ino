@@ -1,7 +1,9 @@
 /* 
  *  Changelog (in reverse order, current first)
  *  
- *  Devlopment Branch
+ *  Devlopment Branch variables
+ *  
+ *  2017-03-11 f41ardu work on variables 
  *  
  *  2017-02-07 f41ardu moved PID variables back to main ino
  *  
