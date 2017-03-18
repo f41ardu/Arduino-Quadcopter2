@@ -1,5 +1,5 @@
 /*
- * Devlopment Branch
+ *  Devlopment Branch variables
  */
 Servo rotor0, rotor1, rotor2,  rotor3;
 

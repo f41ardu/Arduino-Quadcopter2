@@ -1,5 +1,5 @@
 /*
-   Devlopment Branch
+  *  Devlopment Branch variables
 */
 
 // #define PIDMIX(X,Y,Z) rcCommand[THROTTLE] + axisPID[ROLL]*X + axisPID[PITCH]*Y + YAW_DIRECTION * axisPID[YAW]*Z

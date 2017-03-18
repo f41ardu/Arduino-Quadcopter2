@@ -1,7 +1,7 @@
 /*  
  * Common Variables  
  * 
- * Devlopment Branch  
+*  Devlopment Branch variables
  */
 
 

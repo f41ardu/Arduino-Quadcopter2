@@ -1,5 +1,5 @@
 /*
- * Devlopment Branch
+ *  Devlopment Branch variables
  */
 // https://oscarliang.com/quadcopter-pid-explained-tuning/
 

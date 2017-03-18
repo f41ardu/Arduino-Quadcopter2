@@ -1,5 +1,5 @@
 /*
- *Devlopment Branch
+ *  Devlopment Branch variables
  */
 #define SAFE
 

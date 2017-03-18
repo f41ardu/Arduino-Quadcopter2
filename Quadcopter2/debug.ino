@@ -1,5 +1,5 @@
 /*
- * Devlopment Branch
+ *  Devlopment Branch variables
  */
 void debug_process(struct SENSOR_YPR *_quad){
 #ifdef DEBUG_OUTPUT  
